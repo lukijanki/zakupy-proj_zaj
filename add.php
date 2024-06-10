@@ -50,7 +50,7 @@
         $stmt->bind_param("ssss", $item_name, $item_qty, $item_status, $date);
 
         if ($stmt->execute()) {
-            header("Location: index.php"); // Przekierowanie po dodaniu
+            echo "<script>window.location.href = 'index.php';</script>";
             exit(); // Ważne, aby zakończyć skrypt po przekierowaniu
         } else {
             echo "Error: " . $stmt->error; // Wyświetl komunikat o błędzie
