@@ -28,7 +28,7 @@ $result = mysqli_query($conn, $query);
             <div class="col-md-4">
                 <form method="post" action="">
                     <div class="form-group">
-                        <label for="idate">Filtruj za pomoca daty:</label>
+                        <label for="idate">Filtruj za pomocą daty:</label>
                         <input type="date" class="form-control" id="idate" name="idate">
                     </div>
                     <button type="submit" class="btn btn-danger" name="btn">Filtruj</button>
