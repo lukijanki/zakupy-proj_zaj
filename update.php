@@ -42,7 +42,7 @@ if(isset($_GET['id'])) {
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Update Grocery Item</title>
+    <title>Zaktualizuj istę zakupów</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css"> 
 </head>
@@ -51,26 +51,26 @@ if(isset($_GET['id'])) {
         <h1>Update Grocery Item</h1>
         <form method="post" action="?id=<?php echo $res['Id']; ?>">  
             <div class="form-group">
-                <label for="iname">Item Name:</label>
+                <label for="iname">Nazwa produktu:</label>
                 <input type="text" class="form-control" id="iname" name="iname" value="<?php echo $res['Item_name']; ?>" required>
             </div>
             <div class="form-group">
-                <label for="iqty">Item Quantity:</label>
+                <label for="iqty">Ilość:</label>
                 <input type="number" class="form-control" id="iqty" name="iqty" value="<?php echo $res['Item_Quantity']; ?>" required>
             </div>
             <div class="form-group">
-                <label for="istatus">Item Status:</label>
+                <label for="istatus">Status:</label>
                 <select class="form-control" id="istatus" name="istatus">
-                    <option value="0" <?php if ($res['Item_status'] == 0) echo 'selected'; ?>>PENDING</option>
-                    <option value="1" <?php if ($res['Item_status'] == 1) echo 'selected'; ?>>BOUGHT</option>
-                    <option value="2" <?php if ($res['Item_status'] == 2) echo 'selected'; ?>>NOT AVAILABLE</option>
+                    <option value="0" <?php if ($res['Item_status'] == 0) echo 'selected'; ?>>Oczekujący</option>
+                    <option value="1" <?php if ($res['Item_status'] == 1) echo 'selected'; ?>>Zakupiony</option>
+                    <option value="2" <?php if ($res['Item_status'] == 2) echo 'selected'; ?>>Niedostępny</option>
                 </select>
             </div>
             <div class="form-group">
-                <label for="idate">Date:</label>
+                <label for="idate">Data:</label>
                 <input type="date" class="form-control" id="idate" name="idate" value="<?php echo $res['Date']; ?>" required>
             </div>
-            <button type="submit" class="btn btn-danger" name="btn">Update</button>
+            <button type="submit" class="btn btn-danger" name="btn">Aktualizuj</button>
         </form>
     </div>
 </body>
