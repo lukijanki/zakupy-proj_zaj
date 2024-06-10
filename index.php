@@ -14,7 +14,7 @@ $result = mysqli_query($conn, $query);
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>View Grocery List</title>
+    <title>Wyświetl listę zakupów</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css"> 
 </head>
@@ -22,16 +22,16 @@ $result = mysqli_query($conn, $query);
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-8">
-                <h1>View Grocery List</h1>
-                <a href="add.php" class="btn btn-primary">Add Item</a>
+                <h1>Lista zakupów</h1>
+                <a href="add.php" class="btn btn-primary">Dodaj produkt</a>
             </div>
             <div class="col-md-4">
                 <form method="post" action="">
                     <div class="form-group">
-                        <label for="idate">Filter by Date:</label>
+                        <label for="idate">Filtruj za pomoca daty:</label>
                         <input type="date" class="form-control" id="idate" name="idate">
                     </div>
-                    <button type="submit" class="btn btn-danger" name="btn">Filter</button>
+                    <button type="submit" class="btn btn-danger" name="btn">Filtruj</button>
                 </form>
             </div>
         </div>
@@ -44,7 +44,7 @@ $result = mysqli_query($conn, $query);
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title"><?php echo $row['Item_name']; ?></h5>
-                        <p class="card-text">Quantity: <?php echo $row['Item_Quantity']; ?></p>
+                        <p class="card-text">Ilość: <?php echo $row['Item_Quantity']; ?></p>
                         <p class="card-text">Status: 
                             <?php
                             switch ($row['Item_status']) {
@@ -60,9 +60,9 @@ $result = mysqli_query($conn, $query);
                             }
                             ?>
                         </p>
-                        <p class="card-text">Date: <?php echo $row['Date']; ?></p>
-                        <a href="delete.php?id=<?php echo $row['Id']; ?>" class="btn btn-danger btn-sm">Delete</a>
-                        <a href="update.php?id=<?php echo $row['Id']; ?>" class="btn btn-secondary btn-sm">Update</a>
+                        <p class="card-text">Data: <?php echo $row['Date']; ?></p>
+                        <a href="delete.php?id=<?php echo $row['Id']; ?>" class="btn btn-danger btn-sm">Usuń</a>
+                        <a href="update.php?id=<?php echo $row['Id']; ?>" class="btn btn-secondary btn-sm">Aktualizuj</a>
                     </div>
                 </div>
             </div>
