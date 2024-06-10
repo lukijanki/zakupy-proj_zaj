@@ -49,13 +49,13 @@ $result = mysqli_query($conn, $query);
                             <?php
                             switch ($row['Item_status']) {
                                 case 0:
-                                    echo '<span class="text-info">PENDING</span>';
+                                    echo '<span class="text-info">Oczekiwany</span>';
                                     break;
                                 case 1:
-                                    echo '<span class="text-success">BOUGHT</span>';
+                                    echo '<span class="text-success">Zakupiony</span>';
                                     break;
                                 case 2:
-                                    echo '<span class="text-danger">NOT AVAILABLE</span>';
+                                    echo '<span class="text-danger">Niedostępny</span>';
                                     break;
                             }
                             ?>
