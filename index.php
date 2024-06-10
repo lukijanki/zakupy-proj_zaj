@@ -1,3 +1,3 @@
 <?php
-echo test
+echo "Witaj świecie!"; // Tutaj możesz wpisać dowolny tekst
 ?>
