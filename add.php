@@ -1,28 +1,28 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Add Grocery Item</title> 
+    <title>Dodaj produkt do listy</title> 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="container mt-5">
-        <h1>Add Grocery Item</h1>
+        <h1>Dodaj produkt do listy</h1>
         <form action="" method="POST"> 
             <div class="form-group">
-                <label>Item Name:</label>
+                <label>Nazwa produktu:</label>
                 <input type="text" class="form-control" placeholder="Item name" name="iname" required> 
             </div>
             <div class="form-group">
-                <label>Item Quantity:</label>
+                <label>Ilość:</label>
                 <input type="number" class="form-control" placeholder="Item quantity" name="iqty" required> 
             </div>
             <div class="form-group">
-                <label>Item Status:</label>
+                <label>Status:</label>
                 <select class="form-control" name="istatus">
-                    <option value="0">PENDING</option>
-                    <option value="1">BOUGHT</option>
-                    <option value="2">NOT AVAILABLE</option>
+                    <option value="0">Oczekiwany</option>
+                    <option value="1">Zakupiony</option>
+                    <option value="2">Niedostępny</option>
                 </select>
             </div>
             <div class="form-group">
