@@ -52,7 +52,7 @@ $result = mysqli_query($conn, $query);
                                     echo '<span class="text-info">Oczekiwany</span>';
                                     break;
                                 case 1:
-                                    echo '<span class="text-success">Zakupiony</span>';
+                                    echo '<span class="text-success">Kupiony</span>';
                                     break;
                                 case 2:
                                     echo '<span class="text-danger">Niedostępny</span>';
