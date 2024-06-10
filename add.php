@@ -21,7 +21,7 @@
                 <label>Status:</label>
                 <select class="form-control" name="istatus">
                     <option value="0">Oczekiwany</option>
-                    <option value="1">Zakupiony</option>
+                    <option value="1">Kupiony</option>
                     <option value="2">Niedostępny</option>
                 </select>
             </div>
