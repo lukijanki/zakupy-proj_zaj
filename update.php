@@ -62,7 +62,7 @@ if(isset($_GET['id'])) {
                 <label for="istatus">Status:</label>
                 <select class="form-control" id="istatus" name="istatus">
                     <option value="0" <?php if ($res['Item_status'] == 0) echo 'selected'; ?>>Oczekujący</option>
-                    <option value="1" <?php if ($res['Item_status'] == 1) echo 'selected'; ?>>Zakupiony</option>
+                    <option value="1" <?php if ($res['Item_status'] == 1) echo 'selected'; ?>>Kupiony</option>
                     <option value="2" <?php if ($res['Item_status'] == 2) echo 'selected'; ?>>Niedostępny</option>
                 </select>
             </div>
