@@ -48,7 +48,7 @@ if(isset($_GET['id'])) {
 </head>
 <body>
     <div class="container mt-5">
-        <h1>Update Grocery Item</h1>
+        <h1>Aktualizuj produkty</h1>
         <form method="post" action="?id=<?php echo $res['Id']; ?>">  
             <div class="form-group">
                 <label for="iname">Nazwa produktu:</label>
