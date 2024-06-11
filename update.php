@@ -9,7 +9,7 @@ if(isset($_POST['btn'])) {
     $date = $_POST['idate'];
     $id = $_GET['id'];
 
-    // Prepared statement (ochrona przed SQL injection)
+   
     $stmt = $conn->prepare("UPDATE grocerytb SET Item_name = ?, Item_Quantity = ?, Item_status = ?, Date = ? WHERE Id = ?");
     $stmt->bind_param("ssisi", $item_name, $item_qty, $istatus, $date, $id); // "ssisi" oznacza string, string, int, string, int 
 
@@ -17,7 +17,7 @@ if(isset($_POST['btn'])) {
         header('location:index.php');
         exit();
     } else {
-        echo "Error updating record: " . $stmt->error;
+        echo "Błąd aktualizacji: " . $stmt->error;
     }
 
     $stmt->close();
@@ -32,7 +32,7 @@ if(isset($_GET['id'])) {
     if ($result && mysqli_num_rows($result) > 0) {
         $res = mysqli_fetch_assoc($result); 
     } else {
-        echo "Item not found.";
+        echo "Nie znalaziono produktu.";
         exit(); 
     }
 }
@@ -42,7 +42,7 @@ if(isset($_GET['id'])) {
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Zaktualizuj istę zakupów</title>
+    <title>Zaktualizuj produkty w magazynie</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css"> 
 </head>
@@ -61,8 +61,8 @@ if(isset($_GET['id'])) {
             <div class="form-group">
                 <label for="istatus">Status:</label>
                 <select class="form-control" id="istatus" name="istatus">
-                    <option value="0" <?php if ($res['Item_status'] == 0) echo 'selected'; ?>>Oczekiwany</option>
-                    <option value="1" <?php if ($res['Item_status'] == 1) echo 'selected'; ?>>Kupiony</option>
+                    <option value="0" <?php if ($res['Item_status'] == 0) echo 'selected'; ?>>Oczekuje na dostawę</option>
+                    <option value="1" <?php if ($res['Item_status'] == 1) echo 'selected'; ?>>Dostępny</option>
                     <option value="2" <?php if ($res['Item_status'] == 2) echo 'selected'; ?>>Niedostępny</option>
                 </select>
             </div>
