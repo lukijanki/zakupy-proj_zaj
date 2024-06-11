@@ -1,13 +1,13 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Dodaj produkt do listy</title> 
+    <title>Dodaj produkt do magazynu</title> 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="container mt-5">
-        <h1>Dodaj produkt do listy</h1>
+        <h1>Dodaj produkt do magazynu</h1>
         <form action="" method="POST"> 
             <div class="form-group">
                 <label>Nazwa produktu:</label>
@@ -20,8 +20,8 @@
             <div class="form-group">
                 <label>Status:</label>
                 <select class="form-control" name="istatus">
-                    <option value="0">Oczekiwany</option>
-                    <option value="1">Kupiony</option>
+                    <option value="0">Oczekuje na dostawę</option>
+                    <option value="1">Dostępny</option>
                     <option value="2">Niedostępny</option>
                 </select>
             </div>
@@ -45,15 +45,15 @@
         $item_status = $_POST['istatus'];
         $date = $_POST['idate'];
 
-        // Zapytanie SQL z prepared statements (ochrona przed SQL injection)
+     
         $stmt = $conn->prepare("INSERT INTO grocerytb (Item_name, Item_Quantity, Item_status, Date) VALUES (?, ?, ?, ?)");
         $stmt->bind_param("ssss", $item_name, $item_qty, $item_status, $date);
-
+        //Przekierowanie do index.php
         if ($stmt->execute()) {
             echo "<script>window.location.href = 'index.php';</script>";
-            exit(); // Ważne, aby zakończyć skrypt po przekierowaniu
+            exit(); 
         } else {
-            echo "Error: " . $stmt->error; // Wyświetl komunikat o błędzie
+            echo "Error: " . $stmt->error; 
         }
 
         $stmt->close();
