@@ -14,7 +14,7 @@ $result = mysqli_query($conn, $query);
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Wyświetl listę zakupów</title>
+    <title>Produkty w magazynie Sklepu X</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css"> 
 </head>
@@ -22,7 +22,7 @@ $result = mysqli_query($conn, $query);
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-8">
-                <h1>Lista zakupów</h1>
+                <h1>Lista produktów</h1>
                 <a href="add.php" class="btn btn-primary">Dodaj produkt</a>
             </div>
             <div class="col-md-4">
@@ -49,10 +49,10 @@ $result = mysqli_query($conn, $query);
                             <?php
                             switch ($row['Item_status']) {
                                 case 0:
-                                    echo '<span class="text-info">Oczekiwany</span>';
+                                    echo '<span class="text-info">Oczekuje na dostawęy</span>';
                                     break;
                                 case 1:
-                                    echo '<span class="text-success">Kupiony</span>';
+                                    echo '<span class="text-success">Dostępny</span>';
                                     break;
                                 case 2:
                                     echo '<span class="text-danger">Niedostępny</span>';
