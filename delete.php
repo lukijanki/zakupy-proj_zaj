@@ -3,9 +3,9 @@ include("connect.php");
 
 // Walidacja danych wejściowych
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
-    $id = (int)$_GET['id']; // Przekształcenie id na liczbę całkowitą
+    $id = (int)$_GET['id'];
 
-    // Zapytanie SQL z prepared statement (ochrona przed SQL injection)
+   
     $stmt = $conn->prepare("DELETE FROM grocerytb WHERE Id = ?");
     $stmt->bind_param("i", $id);
 
@@ -13,12 +13,12 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         header("Location: index.php"); 
         exit(); 
     } else {
-        echo "Error deleting item: " . $stmt->error;
+        echo "Błąd usuwania przedmiotu: " . $stmt->error;
     }
 
     $stmt->close(); 
 } else {
-    echo "Invalid item ID.";
+    echo "Nieznany numer ID.";
 }
 
 $conn->close(); 
