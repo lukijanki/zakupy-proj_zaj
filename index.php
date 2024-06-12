@@ -69,11 +69,11 @@ $result = mysqli_query($conn, $query);
             <div class="col-md-4 mb-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title"><?php echo $row['Nazwa']; ?></h5>
-                        <p class="card-text">Ilość: <?php echo $row['Ilość']; ?></p>
+                        <h5 class="card-title"><?php echo $row['Item_name']; ?></h5>
+                        <p class="card-text">Ilość: <?php echo $row['Item_Quantity']; ?></p>
                         <p class="card-text">Status: 
                             <?php
-                            switch ($row['Status']) {
+                            switch ($row['Item_status']) {
                                 case 0:
                                     echo '<span class="text-info">Oczekuje na dostawę</span>';
                                     break;
@@ -86,7 +86,7 @@ $result = mysqli_query($conn, $query);
                             }
                             ?>
                         </p>
-                        <p class="card-text">Data: <?php echo $row['Data']; ?></p>
+                        <p class="card-text">Data: <?php echo $row['Date']; ?></p>
                         <a href="delete.php?id=<?php echo $row['Id']; ?>" class="btn btn-danger btn-sm">Usuń</a>
                         <a href="update.php?id=<?php echo $row['Id']; ?>" class="btn btn-secondary btn-sm">Aktualizuj</a>
                     </div>
