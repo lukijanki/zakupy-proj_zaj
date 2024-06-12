@@ -2,10 +2,26 @@
 body {
     font-family: 'Poppins', sans-serif;
     font-weight: 300;
-    background-color: beige;
+    background-color: #f8f9fa;
 }
 
 h1, h2, h3, h4, h5 {
     font-family: 'Poppins', sans-serif;
     font-weight: 700;
 }
+.form-container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.navbar {
+            margin-bottom: 20px;
+        }
+        .card {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 500;
+        }
