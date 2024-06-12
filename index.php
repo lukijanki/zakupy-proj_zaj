@@ -11,19 +11,45 @@ if (isset($_POST['btn'])) {
 $result = mysqli_query($conn, $query);
 ?>
 
-<html>
+<!DOCTYPE html>
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <title>Produkty w magazynie Sklepu X</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css"> 
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            margin-bottom: 20px;
+        }
+        .card {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 500;
+        }
+    </style>
 </head>
 <body>
-    <div class="container mt-5">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Sklep X</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link btn btn-primary text-white" href="add.php">Dodaj produkt</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
         <div class="row">
             <div class="col-md-8">
-                <h1>Lista produktów</h1>
-                <a href="add.php" class="btn btn-primary">Dodaj produkt</a>
+                <h1 class="mb-4">Lista produktów</h1>
             </div>
             <div class="col-md-4">
                 <form method="post" action="">
@@ -40,16 +66,16 @@ $result = mysqli_query($conn, $query);
         <?php
         while ($row = mysqli_fetch_assoc($result)) {
         ?>
-            <div class="col-md-4 mb-3">
+            <div class="col-md-4 mb-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title"><?php echo $row['Item_name']; ?></h5>
-                        <p class="card-text">Ilość: <?php echo $row['Item_Quantity']; ?></p>
+                        <h5 class="card-title"><?php echo $row['Nazwa']; ?></h5>
+                        <p class="card-text">Ilość: <?php echo $row['Ilość']; ?></p>
                         <p class="card-text">Status: 
                             <?php
-                            switch ($row['Item_status']) {
+                            switch ($row['Status']) {
                                 case 0:
-                                    echo '<span class="text-info">Oczekuje na dostawęy</span>';
+                                    echo '<span class="text-info">Oczekuje na dostawę</span>';
                                     break;
                                 case 1:
                                     echo '<span class="text-success">Dostępny</span>';
@@ -60,7 +86,7 @@ $result = mysqli_query($conn, $query);
                             }
                             ?>
                         </p>
-                        <p class="card-text">Data: <?php echo $row['Date']; ?></p>
+                        <p class="card-text">Data: <?php echo $row['Data']; ?></p>
                         <a href="delete.php?id=<?php echo $row['Id']; ?>" class="btn btn-danger btn-sm">Usuń</a>
                         <a href="update.php?id=<?php echo $row['Id']; ?>" class="btn btn-secondary btn-sm">Aktualizuj</a>
                     </div>
