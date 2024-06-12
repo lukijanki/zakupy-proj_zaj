@@ -2,76 +2,94 @@
 include("connect.php");
 mysqli_select_db($conn, $db_name);
 
-if(isset($_POST['btn'])) {
-    $item_name = $_POST['iname'];
-    $item_qty = $_POST['iqty'];
-    $istatus = $_POST['istatus'];
+if (isset($_POST['btn'])) {
     $date = $_POST['idate'];
-    $id = $_GET['id'];
-
-   
-    $stmt = $conn->prepare("UPDATE grocerytb SET Item_name = ?, Item_Quantity = ?, Item_status = ?, Date = ? WHERE Id = ?");
-    $stmt->bind_param("ssisi", $item_name, $item_qty, $istatus, $date, $id); // "ssisi" oznacza string, string, int, string, int 
-
-    if ($stmt->execute()) {
-        header('location:index.php');
-        exit();
-    } else {
-        echo "Błąd aktualizacji: " . $stmt->error;
-    }
-
-    $stmt->close();
-} 
-
-// Wyświetlanie danych do edycji
-if(isset($_GET['id'])) {
-    $id = $_GET['id'];
-    $query = "SELECT * FROM grocerytb WHERE Id = $id";
-    $result = mysqli_query($conn, $query);
-
-    if ($result && mysqli_num_rows($result) > 0) {
-        $res = mysqli_fetch_assoc($result); 
-    } else {
-        echo "Nie znalaziono produktu.";
-        exit(); 
-    }
+    $query = "SELECT * FROM grocerytb WHERE Date='$date'";
+} else {
+    $query = "SELECT * FROM grocerytb";
 }
+$result = mysqli_query($conn, $query);
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Zaktualizuj produkty w magazynie</title>
+    <title>Produkty w magazynie Sklepu X</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css"> 
+    <link rel="stylesheet" href="css/style.css">
+    
+    
 </head>
 <body>
-    <div class="container mt-5">
-        <h1>Aktualizuj produkty</h1>
-        <form method="post" action="?id=<?php echo $res['Id']; ?>">  
-            <div class="form-group">
-                <label for="iname">Nazwa produktu:</label>
-                <input type="text" class="form-control" id="iname" name="iname" value="<?php echo $res['Item_name']; ?>" required>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Sklep X</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link btn btn-primary text-white" href="add.php">Dodaj produkt</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-md-8">
+                <h1>Lista produktów</h1>
             </div>
-            <div class="form-group">
-                <label for="iqty">Ilość:</label>
-                <input type="number" class="form-control" id="iqty" name="iqty" value="<?php echo $res['Item_Quantity']; ?>" required>
+            <div class="col-md-4">
+                <form method="post" action="">
+                    <div class="form-group">
+                        <label for="idate">Filtruj za pomocą daty:</label>
+                        <input type="date" class="form-control" id="idate" name="idate">
+                    </div>
+                    <button type="submit" class="btn btn-danger" name="btn">Filtruj</button>
+                </form>
             </div>
-            <div class="form-group">
-                <label for="istatus">Status:</label>
-                <select class="form-control" id="istatus" name="istatus">
-                    <option value="0" <?php if ($res['Item_status'] == 0) echo 'selected'; ?>>Oczekuje na dostawę</option>
-                    <option value="1" <?php if ($res['Item_status'] == 1) echo 'selected'; ?>>Dostępny</option>
-                    <option value="2" <?php if ($res['Item_status'] == 2) echo 'selected'; ?>>Niedostępny</option>
-                </select>
+        </div>
+
+        <div class="row">
+        <?php
+        while ($row = mysqli_fetch_assoc($result)) {
+        ?>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><?php echo $row['Item_name']; ?></h5>
+                        <p class="card-text">Ilość: <?php echo $row['Item_Quantity']; ?></p>
+                        <p class="card-text">Status: 
+                            <?php
+                            switch ($row['Item_status']) {
+                                case 0:
+                                    echo '<span class="text-info">Oczekuje na dostawę</span>';
+                                    break;
+                                case 1:
+                                    echo '<span class="text-success">Dostępny</span>';
+                                    break;
+                                case 2:
+                                    echo '<span class="text-danger">Niedostępny</span>';
+                                    break;
+                            }
+                            ?>
+                        </p>
+                        <p class="card-text">Data: <?php echo $row['Date']; ?></p>
+                        <a href="delete.php?id=<?php echo $row['Id']; ?>" class="btn btn-danger btn-sm">Usuń</a>
+                        <a href="update.php?id=<?php echo $row['Id']; ?>" class="btn btn-secondary btn-sm">Aktualizuj</a>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="idate">Data:</label>
-                <input type="date" class="form-control" id="idate" name="idate" value="<?php echo $res['Date']; ?>" required>
-            </div>
-            <button type="submit" class="btn btn-danger" name="btn">Aktualizuj</button>
-        </form>
+        <?php
+        }
+        ?>
+        </div> 
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script> 
 </body>
 </html>
